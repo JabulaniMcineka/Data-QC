@@ -63,7 +63,6 @@ from  [QC_Data_DB].[dbo].[AHRI_Location_22768]
 where  LEFT(CAST(Map_ID AS VARCHAR(20)), 5) = 43742
 
 SELECT distinct _10_SAQ_Metadata_Question_10_of_Survey_22768
-
 FROM [QC_Data_DB].[dbo].[22768 Raw Data]
 WHERE Participant_ID = 43742
 
