@@ -37,8 +37,9 @@ FROM [QC_Data_DB].[dbo].[22768 Raw Data] t1
 INNER JOIN [QC_Data_DB].[dbo].[AHRI_Location_22768] t2
     ON t1.Record_Time = t2.Record_Time_22768
    AND t1.Status = t2.Status_22768
-   AND t1.Participant_ID = 43742
-   AND TRY_CAST(LEFT(CAST(t2.Map_ID AS VARCHAR(20)), LEN(CAST(t1.Participant_ID AS VARCHAR(20)))) AS INT) = 43742
+   --AND t1.Participant_ID = 47657
+   AND TRY_CAST(LEFT(CAST(t2.Map_ID AS VARCHAR(20)), LEN(CAST(t1.Participant_ID AS VARCHAR(20)))) AS INT) = t1.Participant_ID
+   --AND t1.Participant_ID = TRY_CAST(LEFT(CAST(t2.Map_ID AS VARCHAR(20)), LEN(CAST(t1.Participant_ID AS VARCHAR(20)))) AS INT)
 WHERE t1.Participant_ID IS NOT NULL
 ORDER BY t1.Participant_ID;
 
@@ -46,11 +47,11 @@ ORDER BY t1.Participant_ID;
 
 select *
 FROM [QC_Data_DB].[dbo].[22768 Raw Data]
-WHERE Participant_ID = 43742
+WHERE Participant_ID = 47657
 
 select *
 from  [QC_Data_DB].[dbo].[AHRI_Location_22768]
-where  LEFT(CAST(Map_ID AS VARCHAR(20)), 5) = 43742
+where  LEFT(CAST(Map_ID AS VARCHAR(20)), 5) = 47657
 
 
 
