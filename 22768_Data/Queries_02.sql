@@ -65,3 +65,51 @@ EXEC sp_rename '[QC_Data_DB].[dbo].[22768 Raw Data].Clean_SAQ_Question_1', 'SAQ1
 EXEC sp_rename '[QC_Data_DB].[dbo].[22768 Raw Data].Clean_SAQ_Question_1', 'SAQ1_22768', 'COLUMN';
 EXEC sp_rename '[QC_Data_DB].[dbo].[22768 Raw Data].Clean_SAQ_Question_2', 'SAQ2_22768', 'COLUMN';
 EXEC sp_rename '[QC_Data_DB].[dbo].[22768 Raw Data]._8_SAQ_Clean', 'SAQ8_22768', 'COLUMN';
+
+
+
+
+
+
+EXEC sp_rename 
+    '[QC_Data_DB].[dbo].[22768 Raw Data].MAQ6_1_22768',
+    'MAQ6_6_22768',
+    'COLUMN';
+
+
+
+
+
+
+ALTER TABLE [QC_Data_DB].[dbo].[AHRI_Location_22768]
+ALTER COLUMN SAQ2_22768 NVARCHAR(255) NULL;
+
+UPDATE L
+SET L.SAQ2_22768 = D.SAQ2_22768
+FROM [QC_Data_DB].[dbo].[AHRI_Location_22768] AS L
+INNER JOIN [QC_Data_DB].[dbo].[22768_dataset_New] AS D
+    ON L.Map_ID = D.Map_ID;
+
+
+
+
+    ALTER TABLE [QC_Data_DB].[dbo].[AHRI_Location_22768]
+DROP COLUMN SAQ2_22768;
+
+
+
+ALTER TABLE [QC_Data_DB].[dbo].[AHRI_Location_22768]
+ADD SAQ2_22768 NVARCHAR(255) NULL;
+
+
+
+SELECT
+    L.Map_ID,
+    L.Record_Time_22768,
+    D.Session_scheduled_Time,
+    D.SAQ2_22768
+FROM [QC_Data_DB].[dbo].[AHRI_Location_22768] L
+INNER JOIN [QC_Data_DB].[dbo].[22768_dataset_New] D
+    ON L.Map_ID = D.Map_ID
+   AND L.Record_Time_22768 = D.Session_     scheduled_Time
+ORDER BY L.Map_ID, L.Record_Time_22768;
